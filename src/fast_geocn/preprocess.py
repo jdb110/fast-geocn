@@ -74,6 +74,8 @@ def main() -> None:
         key = src.stem.replace("china_", "", 1)
         geojson_to_pkl(src, output_dir / f"{key}.pkl")
 
+    print(f"提示：手动转换完成。通常无需手动调用，fast-geocn 首次查询时自动生成缓存。")
+
 
 if __name__ == "__main__":
     main()

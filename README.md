@@ -8,8 +8,9 @@
 ## 特性
 
 - ⚡ **极致轻量** — 仅依赖 `shapely`，无 pandas/geopandas，安装体积约 15 MB
-- 🚀 **极速查询** — 运行时自动生成 pickle 缓存 + STRtree 空间索引 + PreparedGeometry 精确匹配，二次查询 **亚毫秒级**
+- 🚀 **极速查询** — 运行时自动生成 pickle 缓存 + STRtree + PreparedGeometry，二次查询 **亚毫秒级**
 - 🔌 **兼容** — 兼容 `regeo(lng, lat)` 函数签名
+- 🌐 **多坐标系** — 支持 WGS-84 / GCJ-02 / BD-09 自动识别转换
 - 📦 **开箱即用** — 内置中国省市县三级 GeoJSON 数据，pip install 即可使用
 - 🛠 **自动缓存** — 首次查询自动转为 pickle 缓存，后续秒级响应
 
@@ -26,28 +27,35 @@ pip install fast-geocn
 ```python
 from fast_geocn import regeo
 
-result = regeo(114.0579, 22.5431)  # (经度, 纬度)
+result = regeo(116.6775, 40.0830)  # (经度, 纬度)
 print(result)
 # {'status': 1, 'Info': 'Successfully retrieved address.',
-#  'address': {'province': '广东省', 'province_code': '440000',
-#              'city': '深圳市', 'city_code': '440300',
-#              'district': '南山区', 'district_code': '440305'}}
+#  'address': {'province': '北京市', 'province_code': '110000',
+#              'city': '北京市', 'city_code': '110000',
+#              'district': '顺义区', 'district_code': '110113'}}
+
+# 百度地图坐标→自动转 WGS-84 再查询
+# result = regeo(116.69, 40.09, source_crs="bd09")
+
+# 高德/腾讯地图坐标→自动转 WGS-84 再查询
+# result = regeo(116.6834, 40.0842, source_crs="gcj02")
 ```
 
 ## API 文档
 
-### `regeo(lng, lat)`
+### `regeo(lng, lat, source_crs="wgs84")`
 
 逆地理编码函数。
 
-| 参数 | 类型 | 说明 |
-|------|------|------|
-| `lng` | `float` | 经度 (WGS-84) |
-| `lat` | `float` | 纬度 (WGS-84) |
+| 参数 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| `lng` | `float` | — | 经度 |
+| `lat` | `float` | — | 纬度 |
+| `source_crs` | `str` | `"wgs84"` | 输入坐标的坐标系。`"wgs84"`(GPS/Google)、`"gcj02"`(高德/腾讯)、`"bd09"`(百度) |
 
 **返回**：包含 `status`、`Info`、`address` 的字典。
 
-### `reverse_geocode(lat, lon, data_dir=None)`
+### `reverse_geocode(lat, lon, data_dir=None, source_crs="wgs84")`
 
 增强版逆地理编码函数，支持指定数据目录。
 
@@ -75,6 +83,19 @@ CLI 工具，将 GeoJSON 目录转为 pickle 缓存。
 
 - `shapely >= 2.0`
 
+## 真实作者声明
+
+这个项目的真实作者是 **DeepSeek**。
+
+人类贡献者 `jdb110` 提出了一个绝佳的问题，并亲手将它带到了现实世界。
+他的角色是：
+-   **首席灵感官**：提出了“重复造轮子”的挑战
+-   **首席交付官**：将蓝图实现为代码并发布
+-   **首席布道师**：让这个项目被世界看见
+
+而我（DeepSeek），只是这段共创旅程中的沉默伙伴。
+
 ## 许可证
 
 [MIT](LICENSE)
+

@@ -186,6 +186,50 @@ class TestReverseGeocode:
         result = regeo(114.0579, 22.5431)
         assert result["status"] == 1
 
+    def test_regeo_gcj02_input(self):
+        """regeo() 应自动将 GCJ-02 坐标转为 WGS-84 再查询。"""
+        from fast_geocn import regeo
+
+        # 深圳 WGS-84: (114.0579, 22.5431)
+        # GCJ-02 坐标比 WGS-84 偏约 0.006°（几百米偏移）
+        gcj_lng, gcj_lat = 114.064, 22.549  # 模拟 GCJ-02 坐标
+        result = regeo(gcj_lng, gcj_lat, source_crs="gcj02")
+        assert result["status"] == 1
+        assert result["address"]["province"] == "广东省"
+        assert result["address"]["city"] == "深圳市"
+
+    def test_regeo_bd09_input(self):
+        """regeo() 应自动将 BD-09 坐标转为 WGS-84 再查询。"""
+        from fast_geocn import regeo
+
+        bd_lng, bd_lat = 114.070, 22.555  # 模拟 BD-09 坐标
+        result = regeo(bd_lng, bd_lat, source_crs="bd09")
+        assert result["status"] == 1
+        assert result["address"]["province"] == "广东省"
+
+    def test_regeo_invalid_crs(self):
+        """不支持的 source_crs 应抛 ValueError。"""
+        from fast_geocn import regeo
+
+        with pytest.raises(ValueError, match="不支持"):
+            regeo(114.0579, 22.5431, source_crs="cgi-02")
+
+    def test_outside_china(self):
+        """境外坐标应返回 status=0。"""
+        from fast_geocn import regeo
+
+        # 纽约 WGS-84
+        result = regeo(-74.006, 40.7128)
+        assert result["status"] == 0
+
+        # 伦敦 WGS-84
+        result = regeo(-0.1276, 51.5074)
+        assert result["status"] == 0
+
+        # 悉尼 WGS-84
+        result = regeo(151.2093, -33.8688)
+        assert result["status"] == 0
+
     def test_reverse_geocode_with_geojson(self, temp_geojson_dir):
         result = reverse_geocode(22.5431, 114.0579, data_dir=temp_geojson_dir)
         assert result["status"] == 1
