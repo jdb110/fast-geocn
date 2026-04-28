@@ -9,7 +9,7 @@ description = "超轻量离线中国行政区划逆地理编码（仅依赖 shap
 readme = "README.md"
 license = {text = "MIT"}
 authors = [
-    {name = "Your Name", email = "you@example.com"},
+    {name = "jdb110"},
 ]
 requires-python = ">=3.9"
 keywords = ["geocoding", "china", "administrative-division", "reverse-geocoding"]
@@ -45,8 +45,9 @@ docs = [
 fast-geocn-prepare = "fast_geocn.preprocess:main"
 
 [project.urls]
-Repository = "https://github.com/yourname/fast-geocn"
-Issues = "https://github.com/yourname/fast-geocn/issues"
+Homepage = "https://github.com/jdb110/fast-geocn"
+Repository = "https://github.com/jdb110/fast-geocn"
+Issues = "https://github.com/jdb110/fast-geocn/issues"
 
 [tool.setuptools.packages.find]
 where = ["src"]

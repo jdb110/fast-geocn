@@ -9,15 +9,9 @@
 
 - ⚡ **极致轻量** — 仅依赖 `shapely`，无 pandas/geopandas，安装体积约 15 MB
 - 🚀 **极速查询** — 运行时自动生成 pickle 缓存 + STRtree 空间索引 + PreparedGeometry 精确匹配，二次查询 **亚毫秒级**
-- 🔌 **兼容** — 兼容 PyGeoCN 的 `regeo(lng, lat)` 函数签名
+- 🔌 **兼容** — 兼容 `regeo(lng, lat)` 函数签名
 - 📦 **开箱即用** — 内置中国省市县三级 GeoJSON 数据，pip install 即可使用
 - 🛠 **自动缓存** — 首次查询自动转为 pickle 缓存，后续秒级响应
-
-## 安装
-
-```bash
-pip install fast-geocn
-```
 
 ## 快速开始
 
