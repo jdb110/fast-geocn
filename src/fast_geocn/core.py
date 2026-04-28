@@ -177,7 +177,7 @@ def reverse_geocode(
 ) -> Dict[str, Any]:
     """离线逆地理编码。
 
-    首次调用时自动将包内 .geojson 转为 ~/.fast_geocn_cache/*.pkl 缓存。
+    首次调用时自动将包内 .geojson 转为 ~/.fast_geocn_cache/fast_geocn.pkl 缓存。
 
     Args:
         lat: 纬度。
@@ -241,5 +241,5 @@ def reverse_geocode(
 
 
 def regeo(lng: float, lat: float) -> Dict[str, Any]:
-    """与 PyGeoCN 完全兼容的别名：先经度后纬度。"""
+    """兼容接口：先经度后纬度。"""
     return reverse_geocode(lat, lng)

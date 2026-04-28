@@ -1,7 +1,6 @@
 """Tests for fast_geocn.core module."""
 
 import json
-import pickle
 import shutil
 import threading
 import tempfile
@@ -198,5 +197,9 @@ class TestReverseGeocode:
         """使用包内 data/ 数据应正常工作。"""
         _Cache._reset()
         result = reverse_geocode(22.5431, 114.0579)
+        assert result["status"] == 1
+        assert result["address"]["province"] == "广东省"
+        assert result["address"]["city"] == "深圳市"
+        assert result["address"]["district"] is not None
         assert result["status"] == 1
         assert result["address"]["province"] == "广东省"

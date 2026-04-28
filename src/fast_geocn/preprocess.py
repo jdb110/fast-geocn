@@ -70,13 +70,9 @@ def main() -> None:
         print(f"[WARN] {geojson_dir} 下未找到 .geojson 文件")
         return
 
-    # 合并写入单个缓存文件（与 _ensure_cache 格式一致）
-    all_data = {}
     for src in geojson_files:
         key = src.stem.replace("china_", "", 1)
         geojson_to_pkl(src, output_dir / f"{key}.pkl")
-
-    print(f"\n提示：也可使用核心库自动缓存（更简单）。")
 
 
 if __name__ == "__main__":
