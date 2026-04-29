@@ -3,7 +3,9 @@
 [![Python Version](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-**超轻量离线中国行政区划逆地理编码** — 仅依赖 `shapely`，开箱即用。
+> 🏷️ 离线逆地理编码 | 经纬度转省市区 | Python 逆地址解析 | 中国行政区划查询
+
+**超轻量离线中国行政区划逆地理编码（经纬度转省市区 / 坐标转地址）** — 仅依赖 `shapely`，开箱即用。
 
 ## 特性
 
