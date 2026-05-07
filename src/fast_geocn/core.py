@@ -14,6 +14,8 @@ Fast-GeoCN 核心模块：超轻量离线逆地理编码。
 线程安全：_Cache 使用双重检查锁（double-checked locking）保证单例。
 """
 
+from __future__ import annotations
+
 import json
 import pickle
 import threading

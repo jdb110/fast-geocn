@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.2 (2026-05-07)
+
+### 🐛 Bug Fixes
+
+- 修复 `_Cache` 类体内自引用类型注解引发的 `NameError`（`from __future__ import annotations`）
+
 ## 1.1.1 (2026-04-29)
 
 ### 📝 Docs

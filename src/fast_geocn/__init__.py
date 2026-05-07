@@ -10,7 +10,7 @@ from .coord import (
     bd09_to_wgs84,
 )
 
-__version__ = "1.1.1"
+__version__ = "1.1.2"
 __all__ = [
     "reverse_geocode",
     "regeo",
